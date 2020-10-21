@@ -28,4 +28,4 @@
   tasks:
     - name: "Include nexus-iq-server"
       include_role:
-        name: "nexus-iq-server"
+        name: "nexus-iq-server-ansible-role"
