@@ -1,0 +1,33 @@
+---
+dependency:
+  name: galaxy
+  roles: 
+    - geerlingguy.java
+driver:
+  name: docker
+platforms:
+  # - name: centos7
+  #   image: geerlingguy/docker-centos7-ansible
+  #   pre_build_image: true
+  #   command: ""
+  #   volumes:
+  #     - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  #   privileged: true
+  - name: ubuntu1804
+    image: geerlingguy/docker-ubuntu1804-ansible
+    pre_build_image: true
+    command: ""
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+    tty: true
+    
+
+
+provisioner:
+  name: ansible
+verifier:
+  name: ansible

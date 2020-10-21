@@ -1,0 +1,16 @@
+---
+# defaults file for nexus-iq-server
+iqserver_license_path: /Users/taskiner/Downloads/nexus-lifecycle-2020-08-21T134050Z.lic
+iqserver_base_url: http://localhost:8070
+iqserver_create_sample_data: true
+iqserver_user: iqserver
+iqserver_base_dir: /opt/nexus-iq-server
+iqserver_base_log_level: ALL
+iqserver_use_nginx: false
+iqserver_enable_jira_integration: false
+iqserver_jira_server: ""
+iqserver_jira_username: ""
+iqserver_jira_api_token: ""
+iqserver_enable_rut: false
+iqserver_rut_username_header: ""
+iqserver_rut_logout_url: ""

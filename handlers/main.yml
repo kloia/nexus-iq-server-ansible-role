@@ -1,0 +1,9 @@
+---
+# handlers file for nexus-iq-server
+- name: reload systemd
+  command: systemctl daemon-reload
+
+- name: restart iqserver
+  service: 
+    name: nexus-iq-server 
+    state: restarted

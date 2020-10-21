@@ -1,0 +1,31 @@
+---
+- name: add java ppa
+  hosts: all
+  become: yes
+  tasks:
+    - name: install dirmngr
+      when: "ansible_os_family == 'Debian'"
+      apt:
+        name: dirmngr
+        state: present
+        update_cache: yes
+    - name: installing repo for Java 8 in Ubuntu
+      when: "ansible_os_family == 'Debian'"
+      apt_repository: 
+        repo: ppa:openjdk-r/ppa
+
+- name: install java
+  hosts: all
+  become: yes
+  roles:
+    - role: geerlingguy.java
+      when: "ansible_os_family == 'Debian'"
+      java_packages:
+        - openjdk-8-jdk
+
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include nexus-iq-server"
+      include_role:
+        name: "nexus-iq-server"

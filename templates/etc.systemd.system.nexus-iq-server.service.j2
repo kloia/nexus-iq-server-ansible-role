@@ -1,0 +1,14 @@
+[Unit]
+Description=Nexus IQ Server
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/etc/init.d/nexus-iq-server start
+ExecStop=/etc/init.d/nexus-iq-server stop
+User={{ iqserver_user }}
+Restart=on-failure
+TimeoutSec=600
+
+[Install]
+WantedBy=multi-user.target
