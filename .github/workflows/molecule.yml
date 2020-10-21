@@ -18,6 +18,10 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt install docker
+          docker --version
+          docker ps
+          docker ps -a
+          docker run --rm hello-world
           python3 -m pip install --upgrade pip
           python3 -m pip install -r requirements.txt
       - name: Test with molecule
