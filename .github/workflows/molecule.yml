@@ -21,6 +21,8 @@ jobs:
         run: |
           sudo apt install docker
           python3 -m pip install --upgrade pip
+          pwd
+          ls -la
           python3 -m pip install -r requirements.txt
       - name: Test with molecule
         run: |
