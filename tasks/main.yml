@@ -19,7 +19,7 @@
 
 - name: Download latest nexus-iq-server
   get_url:
-    url: https://download.sonatype.com/clm/server/latest.tar.gz
+    url: https://sonatype-download.global.ssl.fastly.net/repository/downloads-prod-group/server/nexus-iq-server-1.100.0-01-bundle.tar.gz
     dest: /opt/nexus-iq-server/latest.tar.gz
 
 - name: Unarchive a file that is already on the remote machine
