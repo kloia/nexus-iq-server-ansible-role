@@ -1,38 +1,62 @@
-Role Name
+Ansible Role: Nexus IQ Server
 =========
 
-A brief description of the role goes here.
+Installs and configures Nexus IQ Server as systemd service.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+This role requires java on target environment. OS should be linux and systemd based one because role installs Nexus IQ Server as systemd service.
 
 Role Variables
 --------------
+All the variables and their default values are: 
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+    # Default variables are like this:
+    
+    iqserver_license_path: ""
+    iqserver_base_url: http://localhost:8070
+    iqserver_create_sample_data: true
+    iqserver_user: iqserver
+    iqserver_base_dir: /opt/nexus-iq-server
+    iqserver_base_log_level: ALL
+    iqserver_use_nginx: false
+    iqserver_enable_jira_integration: false
+    iqserver_jira_server: ""
+    iqserver_jira_username: ""
+    iqserver_jira_api_token: ""
+    iqserver_enable_rut: false
+    iqserver_rut_username_header: ""
+    iqserver_rut_logout_url: ""
+    
+- You should always provide `iqserver_license_path`. This path located in the machine that runs ansible playbook not target machine.
+- You can set log level by `iqserver_base_log_level`. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+- If you want to use nginx as a reverse proxy you should set `iqserver_use_nginx` to `true`. You should also set `iqserver_base_url` to URL that will be set for the IQ Server.
+- If you are just trying out, you can set `iqserver_create_sample_data` to `true`. This option loads sample data to IQ Server.
+- You can enable Jira integration by setting `iqserver_enable_jira_integration` to true and configure by these variables: [`iqserver_jira_server`, `iqserver_jira_username`, `iqserver_jira_api_token`].
+- You can set up reverse proxy authentication by setting `iqserver_enable_rut` to and configure by these variables: [`iqserver_rut_username_header`, `iqserver_rut_logout_url`].
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+The role needs root privileges.
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+        - role: kloia.nexus-iq-server
+          become: true
 
 License
 -------
 
-BSD
+MIT/BSD
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+This role was created in 2020 by [kloia](https://kloia.com/).
