@@ -17,12 +17,12 @@
     group: "{{ iqserver_user }}"
     mode: '0750'
 
-- name: Download latest nexus-iq-server
+- name: Download nexus-iq-server version 1.100.0-01
   get_url:
-    url: https://download.sonatype.com/clm/server/latest.tar.gz
+    url: https://sonatype-download.global.ssl.fastly.net/repository/downloads-prod-group/server/nexus-iq-server-1.100.0-01-bundle.tar.gz
     dest: /opt/nexus-iq-server/latest.tar.gz
 
-- name: Unarchive a file that is already on the remote machine
+- name: Unarchive nexus-iq-server package
   unarchive:
     src: /opt/nexus-iq-server/latest.tar.gz
     dest: /opt/nexus-iq-server
@@ -50,16 +50,16 @@
   template:
     src: "etc.init.d.nexus-iq-server.j2"
     dest: "/etc/init.d/nexus-iq-server"
-    owner: "root"
-    group: "root"
+    owner: "{{ iqserver_user }}"
+    group: "{{ iqserver_user }}"
     mode: "0755"
 
 - name: generate system limits config
   template:
     src: "etc.security.limits.d.99-iqserver.conf.j2"
     dest: "/etc/security/limits.d/99-iqserver.conf"
-    owner: "root"
-    group: "root"
+    owner: "{{ iqserver_user }}"
+    group: "{{ iqserver_user }}"
     mode: "0640"
   notify: 
     - reload systemd
@@ -79,8 +79,8 @@
   template:
     src: "etc.systemd.system.nexus-iq-server.service.j2"
     dest: "/etc/systemd/system/nexus-iq-server.service"
-    owner: "root"
-    group: "root"
+    owner: "{{ iqserver_user }}"
+    group: "{{ iqserver_user }}"
     mode: "0644"
   notify: 
     - reload systemd
@@ -91,4 +91,3 @@
     name: nexus-iq-server 
     enabled: yes
     state: started
-  

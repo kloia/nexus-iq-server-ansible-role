@@ -3,11 +3,11 @@ Description=Nexus IQ Server
 After=network.target
 
 [Service]
-Type=simple
+Type=forking
 ExecStart=/etc/init.d/nexus-iq-server start
 ExecStop=/etc/init.d/nexus-iq-server stop
 User={{ iqserver_user }}
-Restart=on-failure
+Restart=on-abort
 TimeoutSec=600
 
 [Install]

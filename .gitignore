@@ -1,5 +1,5 @@
 local-configure.yml
-.vagrant/
+*.vagrant/
 ._*
 bin/
 lib/
@@ -11,3 +11,4 @@ tests.out
 vbox_host.cfg
 .DS_Store
 *.py[co]
+.idea
